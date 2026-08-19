@@ -5,8 +5,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- API Keys ---
+# --- API Keys & Provider ---
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
+LLM_MODEL = os.getenv("LLM_MODEL", "openai/gpt-4o-mini")
+RAGAS_EMBEDDING_MODEL = os.getenv("RAGAS_EMBEDDING_MODEL", "openai/text-embedding-ada-002")
+
+# Expose to environment for langchain / ragas / openai sdk
+if OPENAI_BASE_URL:
+    os.environ["OPENAI_BASE_URL"] = OPENAI_BASE_URL
+    os.environ["OPENAI_API_BASE"] = OPENAI_BASE_URL
 
 # --- Qdrant ---
 QDRANT_HOST = "localhost"
